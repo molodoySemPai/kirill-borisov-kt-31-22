@@ -1,4 +1,6 @@
+using kirillborisovkt_31_22.Database;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using NLog;
 using NLog.Web;
@@ -14,6 +16,9 @@ try
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+
+    builder.Services.AddDbContext<TeacherDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")))   ;
 
     var app = builder.Build();
 
